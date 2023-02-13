@@ -149,7 +149,6 @@ const game = (fps, xBound, yBound) => {
     console.clear();
     console.log(formatScore(snake, timeStarted));
     console.log(formatField(field));
-    console.log(process.argv);
   }, speed);
 
   process.stdin.setRawMode(true);
