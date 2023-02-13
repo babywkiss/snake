@@ -54,12 +54,12 @@ const formatField = (field) => {
 };
 
 const formatScore = (snake, timeStarted) => {
-  const applesCollected = snake.length - 1;
+  const applesCollected = snake.length - 2;
   const timePassed = Math.floor((Date.now() - timeStarted) / 1000);
   const blueLabel =
-    FONT_COLORS.black + FONT_MODS.bright + BACKGROUND_COLORS.blue;
+    FONT_COLORS.black + FONT_MODS.bright + BACKGROUND_COLORS.red;
   const yellowLabel =
-    FONT_COLORS.black + FONT_MODS.bright + BACKGROUND_COLORS.yellow;
+    FONT_COLORS.black + FONT_MODS.bright + BACKGROUND_COLORS.magenta;
   return `${blueLabel} Score: ${applesCollected} apples. ${yellowLabel} Passed: ${timePassed} sec. ${FONT_MODS.reset}`;
 };
 
@@ -89,16 +89,15 @@ const getBlockInBounds = (xBound, yBound) => [
 const spawnApple = (xBound, yBound, snake) => {
   const apple = getBlockInBounds(xBound, yBound);
   while (true) {
-    const sameCords = snake.find(([x, y]) => {
+    const sameFound = snake.find(([x, y]) => {
       apple[0] === x && apple[1] === y;
     });
-    if (!sameCords) {
-      break;
+    if (!sameFound) {
+      return apple;
     } else {
       apple = getBlockInBounds(xBound, yBound);
     }
   }
-  return apple;
 };
 
 const isSnakeCollided = (snake, xBound, yBound) => {
@@ -119,7 +118,10 @@ const isAppleCollected = (apple, snake) => {
 const game = (fps, xBound, yBound) => {
   const timeStarted = Date.now();
   const speed = 1000 / fps;
-  const snake = [[1, 1]];
+  const snake = [
+    [1, 0],
+    [1, 1],
+  ];
   let [xDir, yDir] = [0, 1];
   let prevKey = "";
   let apple = spawnApple(xBound, yBound, snake);
@@ -127,6 +129,13 @@ const game = (fps, xBound, yBound) => {
   setInterval(() => {
     moveSnake(snake, xDir, yDir);
     if (isSnakeCollided(snake, xBound, yBound)) {
+      const cyanLabel =
+        FONT_COLORS.black + FONT_MODS.bright + BACKGROUND_COLORS.cyan;
+      console.clear();
+      console.log(
+        `${cyanLabel} Results at ${fps} FPS on field ${xBound}x${yBound}: ${FONT_MODS.reset}`
+      );
+      console.log(formatScore(snake, timeStarted));
       process.exit();
     }
     if (isAppleCollected(apple, snake)) {
@@ -140,6 +149,7 @@ const game = (fps, xBound, yBound) => {
     console.clear();
     console.log(formatScore(snake, timeStarted));
     console.log(formatField(field));
+    console.log(process.argv);
   }, speed);
 
   process.stdin.setRawMode(true);
@@ -155,7 +165,8 @@ const game = (fps, xBound, yBound) => {
   });
 };
 
-const FPS = 10;
-const XBOUND = 18;
-const YBOUND = 18;
+const FPS = parseInt(process.argv[2]) || 10;
+const XBOUND = parseInt(process.argv[3]) || 18;
+const YBOUND = parseInt(process.argv[3]) || 18;
+
 game(FPS, XBOUND, YBOUND);
