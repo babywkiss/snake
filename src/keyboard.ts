@@ -5,3 +5,5 @@ export const keyboard = (onKeydown: (key: string) => void) => {
     onKeydown(data.toString());
   });
 };
+
+export default keyboard;

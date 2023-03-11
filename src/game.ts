@@ -107,3 +107,5 @@ export class Game {
     return this;
   }
 }
+
+export default Game;
