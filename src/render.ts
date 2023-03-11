@@ -24,8 +24,8 @@ export const render = (game: Game) => {
     }
     field[c.y][c.x] = chalk.hex(gradient[i])(sym);
   });
-  game.stones.forEach((c) => (field[c.y][c.x] = chalk.hex("#cdd6f4")(" ")));
-  field[game.apple.y][game.apple.x] = chalk.hex("#eba0ac")(" ");
+  game.stones.forEach((c) => (field[c.y][c.x] = " "));
+  field[game.apple.y][game.apple.x] = chalk.red(" ");
   const top = "╭" + "──".repeat(game.config.width) + "╮" + "\n";
   const bottom = "╰" + "──".repeat(game.config.width) + "╯" + "\n";
   console.log(
