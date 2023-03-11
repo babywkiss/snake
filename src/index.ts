@@ -37,10 +37,10 @@ const renderField = (game: Game) => {
   });
   game.stones.forEach((c) => (field[c.y][c.x] = chalk.hex("#cdd6f4")(" ")));
   field[game.apple.y][game.apple.x] = chalk.hex("#eba0ac")(" ");
-  const top = "╭" + "--".repeat(config.width) + "╮" + "\n";
-  const bottom = "╰" + "--".repeat(config.width) + "╯" + "\n";
+  const top = "╭" + "──".repeat(config.width) + "╮" + "\n";
+  const bottom = "╰" + "──".repeat(config.width) + "╯" + "\n";
   return (
-    top + field.map((r) => "|" + r.join("") + "|").join("\n") + "\n" + bottom
+    top + field.map((r) => "│" + r.join("") + "│").join("\n") + "\n" + bottom
   );
 };
 
