@@ -1,7 +1,11 @@
 # Classic Snake Game CLI
+
 ### Written in JavaScript (NodeJS)
-<img src="demo.gif" width="400px"/>
+
+![](demo.mov)
 
 ### How to run
+
 - Clone repo
-- Run `node snake.js [fps] [width] [height]` or `node snake.js` with defaults would be fps=10, width = 18, height = 18
+- Install deps `npm i`
+- Run `npm start`
