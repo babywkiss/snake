@@ -2,7 +2,7 @@
 
 ### Written in JavaScript (NodeJS)
 
-![](demo.mov)
+https://user-images.githubusercontent.com/89997671/224461588-0c841260-5b2e-4538-8dcd-0659a1903792.mov
 
 ### How to run
 
