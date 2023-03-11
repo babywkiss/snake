@@ -2,7 +2,7 @@
 
 ### Written in JavaScript (NodeJS)
 
-https://user-images.githubusercontent.com/89997671/224461588-0c841260-5b2e-4538-8dcd-0659a1903792.mov
+https://user-images.githubusercontent.com/89997671/224462174-33a8ccdf-208a-4d9a-9561-a0573b67d3b9.mov
 
 ### How to run
 
