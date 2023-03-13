@@ -24,11 +24,12 @@ const game = new Game(config);
 let move: keyof typeof directions = "down";
 
 keyboard((k) => (move = KEYMAP[k as keyof typeof KEYMAP] ?? move));
+const start = Date.now();
 setInterval(() => {
   try {
     game.tick(move);
   } catch {
     process.exit();
   }
-  render(game);
+  render(game, Math.floor((Date.now() - start) / 1000).toString());
 }, 100);
