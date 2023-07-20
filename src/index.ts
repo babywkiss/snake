@@ -1,11 +1,14 @@
-import { directions, Game } from "./game.js";
+import { Game } from "./game.js";
 import keyboard from "./keyboard.js";
 import render from "./render.js";
+import { Config, Direction } from "./types.js";
 
 // TODO: User interface for customization config
-const config = {
-  width: 20,
-  height: 20,
+const config: Config = {
+  fieldSize: {
+    width: 20,
+    height: 20,
+  },
   stones: 3,
 };
 
@@ -21,7 +24,7 @@ const KEYMAP = {
 } as const;
 
 const game = new Game(config);
-let move: keyof typeof directions = "down";
+let move: Direction = "down";
 
 keyboard((k) => (move = KEYMAP[k as keyof typeof KEYMAP] ?? move));
 const start = Date.now();

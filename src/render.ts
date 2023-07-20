@@ -3,8 +3,8 @@ import chroma from "chroma-js";
 import chalk, { ChalkInstance } from "chalk";
 
 const createField = (game: Game) =>
-  Array.from({ length: game.config.height }, (_) =>
-    Array(game.config.width).fill("  ")
+  Array.from({ length: game.config.fieldSize.height }, (_) =>
+    Array(game.config.fieldSize.width).fill("  "),
   );
 
 // TODO: Refactor this trash :)
@@ -41,18 +41,19 @@ export const render = (game: Game, secondsPassed: string) => {
   });
   game.stones.forEach((c) => (field[c.y][c.x] = " "));
   field[game.apple.y][game.apple.x] = chalk.red(" ");
-  const top = "╭" + "──".repeat(game.config.width) + "╮" + "\n";
-  const bottom = "╰" + "──".repeat(game.config.width) + "╯";
+  const fieldSize = game.config.fieldSize;
+  const top = "╭" + "──".repeat(fieldSize.width) + "╮" + "\n";
+  const bottom = "╰" + "──".repeat(fieldSize.width) + "╯";
   // status bar
   const segments = [
-    [`ﱖ ${game.config.width}x${game.config.height}  `, chalk.gray],
+    [`ﱖ ${fieldSize.width}x${fieldSize.height}  `, chalk.gray],
     [`龍${10}  `, chalk.gray],
     [` ${secondsPassed}  `, chalk.blue],
     [` ${game.snake.length - 3}  `, chalk.red],
   ];
   const effectiveLength = segments.map((s) => s[0]).join("").length;
-  const padding = Math.floor((game.config.width * 2 - effectiveLength) / 2);
-  const fixer = effectiveLength + padding * 2 - game.config.width * 2 + 1;
+  const padding = Math.floor((fieldSize.width * 2 - effectiveLength) / 2);
+  const fixer = effectiveLength + padding * 2 - fieldSize.width * 2 + 1;
   const message =
     (padding >= 0 ? " ".repeat(padding) : "") +
     segments.map((s) => (s[1] as ChalkInstance)(s[0])).join("") +
@@ -64,7 +65,7 @@ export const render = (game: Game, secondsPassed: string) => {
       field.map((r) => "│" + r.join("") + "│").join("\n") +
       "\n" +
       bottom +
-      "\n"
+      "\n",
   );
 };
 
