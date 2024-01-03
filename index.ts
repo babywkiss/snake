@@ -6,10 +6,16 @@ const canvas = new Canvas();
 
 const centerY = Math.floor(canvas.height / 2);
 
-const createApple = () => ({
-	x: Math.floor((Math.random() * canvas.width) / 2),
-	y: Math.floor(Math.random() * canvas.height),
-});
+const createApple = () => {
+	while (true) {
+		const pos = {
+			x: Math.floor((Math.random() * canvas.width) / 2),
+			y: Math.floor(Math.random() * canvas.height),
+		};
+		if (!snake.positions.some(({ x, y }) => x === pos.x || y === pos.y))
+			return pos;
+	}
+};
 
 canvas.show();
 
