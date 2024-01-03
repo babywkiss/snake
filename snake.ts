@@ -33,7 +33,8 @@ export default class Snake {
 		{ x: 1, y: 0 },
 		{ x: 2, y: 0 },
 	];
-	#direction: Direction = "right";
+	#currentDir: Direction = "right";
+	#prevDir: Direction = "right";
 
 	get head() {
 		return this.positions.at(-1) as Position;
@@ -48,17 +49,18 @@ export default class Snake {
 	}
 
 	set direction(direction: Direction) {
-		if (!(getOpposite(this.#direction) === direction))
-			this.#direction = direction;
+		if (!(getOpposite(this.#prevDir) === direction))
+			this.#currentDir = direction;
 	}
 
 	move() {
-		this.positions.push(nextPos(this.head, this.#direction));
+		this.positions.push(nextPos(this.head, this.#currentDir));
 		this.positions.shift();
+		this.#prevDir = this.#currentDir;
 	}
 
 	grow() {
-		this.positions.unshift(nextPos(this.last, getOpposite(this.#direction)));
+		this.positions.unshift(nextPos(this.last, getOpposite(this.#prevDir)));
 	}
 
 	isValid(bounds: Position) {
