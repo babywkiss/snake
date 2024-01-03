@@ -1,15 +1,10 @@
-# snake
+# Snake Game
 
-To install dependencies:
+> WIP
 
-```bash
-bun install
-```
+This projects uses simple terminal canvas implementation,
+with minimum difference calculation and batch flushing.
 
-To run:
+### Demo
 
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.0.20. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+![demo](./demo.gif)
